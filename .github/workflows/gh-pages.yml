@@ -45,7 +45,7 @@ jobs:
           cd ./src
           nim js main
           mkdir ../docs/
-          cp ./index.html ../sdocs/
+          cp ./index.html ../docs/
           cp ./main.js ../docs/
           cp ./manifest.json ../docs/
 
