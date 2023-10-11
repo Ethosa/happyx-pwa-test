@@ -38,7 +38,6 @@ jobs:
           nimble refresh
           nimble install happyx@#head -y -d
           cd ./src
-          nim js main
           mkdir ../docs/
           ls
           cp ./index.html ../docs/
