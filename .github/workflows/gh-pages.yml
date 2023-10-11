@@ -38,6 +38,8 @@ jobs:
         run: |
           nimble refresh
           nimble install happyx@#head -y -d
+          ls ~/.nimble/pkgs
+          ls ~/.nimble/bin
       
       - name: Build HappyX website 🌐
         timeout-minutes: 2
