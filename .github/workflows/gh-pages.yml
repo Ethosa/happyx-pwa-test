@@ -51,7 +51,7 @@ jobs:
           mkdir ./docs/public/
           cp ./src/index.html ./docs/
           cp ./src/main.js ./docs/
-          cp ./src/mainfest.json ./docs/
+          cp ./src/manifest.json ./docs/
           cp ./src/public/* ./docs/happyx-pwa-test/public/
           cp ./src/public/* ./docs/public/
 
