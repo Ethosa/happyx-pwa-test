@@ -46,7 +46,7 @@ jobs:
           nim js -d:danger --opt:size --checks:off --assertions:off --hints:off --warnings:off --panics:off --lineDir:off main
           echo "minify js"
           curl -X POST -H "Content-Type: application/x-www-form-urlencoded" --data-urlencode "input@main.js" https://www.toptal.com/developers/javascript-minifier/api/raw -o main.js
-          cd ../../..
+          cd ../
           mkdir ./docs/happyx-pwa-test/public/
           mkdir ./docs/public/
           cp ./src/index.html ./docs/
