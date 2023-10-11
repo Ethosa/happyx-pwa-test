@@ -10,13 +10,13 @@ permissions:
 
 jobs:
   before:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     if: "! contains(github.event.head_commit.message, '[skip ci]')"
     steps:
       - run: echo "not contains '[skip ci]'"
 
   docs:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     needs: before
     env:
       nim_version: '1.6.14'
@@ -45,6 +45,7 @@ jobs:
           cd ./src
           nim js main
           mkdir ../docs/
+          ls
           cp ./index.html ../docs/
           cp ./main.js ../docs/
           cp ./manifest.json ../docs/
