@@ -25,10 +25,11 @@ jobs:
 
       - name: Install Dependencies 🔃
         run: |
-          curl https://nim-lang.org/choosenim/init.sh -sSf | sh
+          curl https://nim-lang.org/choosenim/init.sh -sSf | sh -y
           choosenim ${{ matrix.nim_version }}
           ln -s ~/.nimble/bin/nim /usr/bin/nim
           ln -s ~/.nimble/bin/nimble /usr/bin/nimble
+          export PATH="$PATH:~/.nimble/bin"
           ls ~/.nimble/pkgs
           ls ~/.nimble/bin
           nimble refresh
