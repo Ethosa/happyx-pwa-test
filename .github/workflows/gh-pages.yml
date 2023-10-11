@@ -1,0 +1,63 @@
+name: Github Pages 🌐
+
+on:
+  push:
+    branches:
+      - 'master'
+
+permissions:
+  contents: write
+
+jobs:
+  before:
+    runs-on: windows-latest
+    if: "! contains(github.event.head_commit.message, '[skip ci]')"
+    steps:
+      - run: echo "not contains '[skip ci]'"
+
+  docs:
+    runs-on: windows-latest
+    needs: before
+    env:
+      nim_version: '1.6.14'
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Cache nimble
+        id: cache-nimble
+        uses: actions/cache@v1
+        with:
+          path: ~/.nimble
+          key: ${{ runner.os }}-nimble-${{ hashFiles('*.nimble') }}
+      
+      - uses: jiro4989/setup-nim-action@v1
+        with:
+          nim-version: ${{ env.nim_version }}
+
+      - name: Install Dependencies 🔃
+        run: |
+          nimble refresh
+          nimble install -y -d
+      
+      - name: Build HappyX website 🌐
+        timeout-minutes: 2
+        run: |
+          cd ./src
+          nim js -d:danger --opt:size --checks:off --assertions:off --hints:off --warnings:off --panics:off --lineDir:off main
+          echo "minify js"
+          curl -X POST -H "Content-Type: application/x-www-form-urlencoded" --data-urlencode "input@main.js" https://www.toptal.com/developers/javascript-minifier/api/raw -o main.js
+          cd ../../..
+          mkdir ./docs/happyx-pwa-test/public/
+          mkdir ./docs/public/
+          cp ./src/index.html ./docs/
+          cp ./src/main.js ./docs/
+          cp ./src/mainfest.json ./docs/
+          cp ./src/public/* ./docs/happyx-pwa-test/public/
+          cp ./src/public/* ./docs/public/
+
+      - name: Deploy documents 💨
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+        if: github.ref == 'refs/heads/master'
