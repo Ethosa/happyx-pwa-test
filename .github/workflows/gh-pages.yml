@@ -52,8 +52,6 @@ jobs:
           cp ./src/index.html ./docs/
           cp ./src/main.js ./docs/
           cp ./src/manifest.json ./docs/
-          cp ./src/public/* ./docs/happyx-pwa-test/public/
-          cp ./src/public/* ./docs/public/
 
       - name: Deploy documents 💨
         uses: peaceiris/actions-gh-pages@v3
