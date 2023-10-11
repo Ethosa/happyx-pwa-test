@@ -30,6 +30,7 @@ jobs:
       - uses: jiro4989/setup-nim-action@v1
         with:
           nim-version: ${{ matrix.nim_version }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Build HappyX website 🌐
         timeout-minutes: 2
