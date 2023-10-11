@@ -33,18 +33,12 @@ jobs:
       - uses: jiro4989/setup-nim-action@v1
         with:
           nim-version: ${{ matrix.nim_version }}
-
-      - name: Install Dependencies 🔃
-        run: |
-          export PATH="$PATH:~/.nimble/bin"
-          nimble refresh
-          nimble install happyx@#head -y -d
-          sudo ls ~/.nimble/pkgs2
-          sudo ls ~/.nimble/bin
       
       - name: Build HappyX website 🌐
         timeout-minutes: 2
         run: |
+          nimble refresh
+          nimble install happyx@#head -y -d
           cd ./src
           nim js main
           mkdir ../docs/
