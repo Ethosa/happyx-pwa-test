@@ -39,7 +39,7 @@ jobs:
           sudo ln -s ~/.nimble/bin/nim /usr/bin/nim
           sudo ln -s ~/.nimble/bin/nimble /usr/bin/nimble
           export PATH="$PATH:~/.nimble/bin"
-          sudo ls ~/.nimble/pkgs
+          sudo ls ~/.nimble/pkgs2
           sudo ls ~/.nimble/bin
           nimble refresh
           nimble install happyx@#head -y -d
