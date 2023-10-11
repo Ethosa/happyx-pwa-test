@@ -23,10 +23,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - uses: actions/checkout@v3
+      - name: Cache nimble
+        id: cache-nimble
+        uses: actions/cache@v3
+        with:
+          path: ~/.nimble
+          key: ${{ runner.os }}-nimble-${{ hashFiles('*.nimble') }}
+      - uses: jiro4989/setup-nim-action@v1
+        with:
+          nim-version: ${{ matrix.nim_version }}
+
       - name: Install Dependencies 🔃
         run: |
-          wget -qO - https://nim-lang.org/choosenim/init.sh | sh
-          choosenim ${{ matrix.nim_version }} -y
           ln -s ~/.nimble/bin/nim /usr/bin/nim
           ln -s ~/.nimble/bin/nimble /usr/bin/nimble
           export PATH="$PATH:~/.nimble/bin"
