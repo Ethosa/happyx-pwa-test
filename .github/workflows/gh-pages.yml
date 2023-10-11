@@ -23,23 +23,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Cache nimble
-        id: cache-nimble
-        uses: actions/cache@v1
-        with:
-          path: ~/.nimble
-          key: ${{ runner.os }}-nimble-${{ hashFiles('*.nimble') }}
-      
-      - uses: jiro4989/setup-nim-action@v1
-        with:
-          nim-version: ${{ env.nim_version }}
-
       - name: Install Dependencies 🔃
         run: |
-          nimble refresh
-          nimble install happyx@#head -y -d
+          curl https://nim-lang.org/choosenim/init.sh -sSf | sh
+          choosenim ${{ matrix.nim_version }}
+          ln -s ~/.nimble/bin/nim /usr/bin/nim
+          ln -s ~/.nimble/bin/nimble /usr/bin/nimble
           ls ~/.nimble/pkgs
           ls ~/.nimble/bin
+          nimble refresh
+          nimble install happyx@#head -y -d
       
       - name: Build HappyX website 🌐
         timeout-minutes: 2
