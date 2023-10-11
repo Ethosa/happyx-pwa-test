@@ -38,7 +38,7 @@ jobs:
         run: |
           sudo ln -s ~/.nimble/bin/nim /usr/bin/nim
           sudo ln -s ~/.nimble/bin/nimble /usr/bin/nimble
-          sudo export PATH="$PATH:~/.nimble/bin"
+          export PATH="$PATH:~/.nimble/bin"
           sudo ls ~/.nimble/pkgs
           sudo ls ~/.nimble/bin
           nimble refresh
