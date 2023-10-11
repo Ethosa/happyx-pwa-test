@@ -36,8 +36,6 @@ jobs:
 
       - name: Install Dependencies 🔃
         run: |
-          sudo ln -s ~/.nimble/bin/nim /usr/bin/nim
-          sudo ln -s ~/.nimble/bin/nimble /usr/bin/nimble
           export PATH="$PATH:~/.nimble/bin"
           nimble refresh
           nimble install happyx@#head -y -d
