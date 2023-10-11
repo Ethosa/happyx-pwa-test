@@ -16,14 +16,17 @@ jobs:
       - run: echo "not contains '[skip ci]'"
 
   docs:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+        nim_version:
+          - '2.0.0'
     needs: before
-    env:
-      nim_version: 'stable'
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/checkout@v3
       - name: Cache nimble
         id: cache-nimble
         uses: actions/cache@v3
