@@ -37,7 +37,7 @@ jobs:
       - name: Install Dependencies 🔃
         run: |
           nimble refresh
-          nimble install -y -d
+          nimble install happyx@#head -y -d
       
       - name: Build HappyX website 🌐
         timeout-minutes: 2
