@@ -43,13 +43,11 @@ jobs:
         timeout-minutes: 2
         run: |
           cd ./src
-          nim js -d:danger --opt:size --checks:off --assertions:off --hints:off --warnings:off --panics:off --lineDir:off main
-          cd ../
-          mkdir ./docs/happyx-pwa-test/public/
-          mkdir ./docs/public/
-          cp ./src/index.html ./docs/
-          cp ./src/main.js ./docs/
-          cp ./src/manifest.json ./docs/
+          nim js main
+          mkdir ../docs/
+          cp ./index.html ../sdocs/
+          cp ./main.js ../docs/
+          cp ./manifest.json ../docs/
 
       - name: Deploy documents 💨
         uses: peaceiris/actions-gh-pages@v3
